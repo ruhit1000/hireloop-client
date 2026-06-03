@@ -5,9 +5,13 @@ import { Button } from "@heroui/react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { authClient } from "@/lib/aith-client";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const {data: session} = authClient.useSession();
+  console.log("Current Session:", session); 
 
   const menuItems = [
     { name: "Browse Jobs", pathname: "/jobs" },

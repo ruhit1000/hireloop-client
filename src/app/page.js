@@ -1,7 +1,7 @@
 import Banner from "@/components/Homepage/Banner";
 import CallToAction from "@/components/Homepage/CallToAction";
 import Features from "@/components/Homepage/Features";
-import Stats from "@/components/Homepage/Stats";
+import Pricing from "@/components/Homepage/Pricing";
 
 
 export default function Home() {
@@ -9,6 +9,7 @@ export default function Home() {
     <div>
       <Banner />
       <Features />
+      <Pricing />
       <CallToAction />
     </div>
   );

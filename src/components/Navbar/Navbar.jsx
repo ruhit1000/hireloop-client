@@ -8,11 +8,11 @@ import Image from "next/image";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   const menuItems = [
     { name: "Browse Jobs", pathname: "/jobs" },
     { name: "Company", pathname: "/company" },
-    { name: "Pricing", pathname: "/pricing" }
+    { name: "Pricing", pathname: "/pricing" },
   ];
 
   return (
@@ -20,11 +20,11 @@ export default function Navbar() {
       <div className="flex items-center justify-between w-full">
         {/* Brand */}
         <Link href="/" className="font-bold text-2xl tracking-tighter">
-          <Image 
-            src="/images/logo.png" 
+          <Image
+            src="/images/logo.png"
             alt="Hireloop Logo"
-            width={120} 
-            height={32} 
+            width={120}
+            height={32}
             priority
           />
         </Link>

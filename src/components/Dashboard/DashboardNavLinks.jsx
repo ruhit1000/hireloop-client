@@ -17,7 +17,7 @@ const DashboardNavLinks = () => {
   const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", pathname: "/dashboard/recruiter" },
     { icon: Building2, label: "My Company", pathname: "/dashboard/company" },
-    { icon: Briefcase, label: "Manage Jobs", pathname: "/dashboard/jobs" },
+    { icon: Briefcase, label: "Manage Jobs", pathname: "/dashboard/recruiter/jobs" },
     {
       icon: FileText,
       label: "Applications",

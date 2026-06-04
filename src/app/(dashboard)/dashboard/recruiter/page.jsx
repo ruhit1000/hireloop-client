@@ -1,37 +1,16 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import React from "react";
-import { FileText, Users, Zap, CheckCircle } from "lucide-react";
 import DashboardStats from "@/components/Dashboard/DashboardStats";
+import { applicationsData, companiesData, dashboardDummyStats } from "@/Data/data";
+import RecentApplications from "@/components/Dashboard/RecentApplications";
+import MyTopCompanies from "@/components/Dashboard/MyTopCompanies";
 
 const RecruiterHomePage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   const user = session?.user;
-
-  const dashboardDummyStats = [
-    {
-      icon: FileText,
-      name: "Total Job Posts",
-      data: "48",
-    },
-    {
-      icon: Users,
-      name: "Total Applicants",
-      data: "1,284",
-    },
-    {
-      icon: Zap,
-      name: "Active Jobs",
-      data: "18",
-    },
-    {
-      icon: CheckCircle,
-      name: "Jobs Closed",
-      data: "32",
-    },
-  ];
 
   return (
     <div className="p-6">
@@ -40,6 +19,11 @@ const RecruiterHomePage = async () => {
       </h1>
       <div className="mt-8 p-4">
         <DashboardStats stats={dashboardDummyStats} />
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-6 mt-6 p-4">
+        <RecentApplications applications={applicationsData} />
+        <MyTopCompanies companies={companiesData} />
       </div>
     </div>
   );

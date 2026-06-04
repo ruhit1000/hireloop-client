@@ -12,6 +12,9 @@ import {
   TextField,
   Toast,
   toast,
+  RadioGroup,
+  Radio,
+  Description,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
@@ -25,12 +28,12 @@ const SignUpPage = () => {
     setIsLoading(true);
     const formData = new FormData(e.target);
     const UserData = Object.fromEntries(formData.entries());
-    
-    const {data, error} = await authClient.signUp.email({
-        email: UserData.email,
-        password: UserData.password,
-        name: UserData.name,
-        imageURL: UserData.imageURL || null,
+
+    const { data, error } = await authClient.signUp.email({
+      email: UserData.email,
+      password: UserData.password,
+      name: UserData.name,
+      role: UserData.role, // "seeker" or "recruiter" collected here
     });
 
     if (error) {
@@ -58,6 +61,50 @@ const SignUpPage = () => {
 
         {/* Form */}
         <Form className="flex flex-col gap-5 w-full" onSubmit={onSubmit}>
+          {/* Account Type Radio Group */}
+          <div className="flex flex-col gap-2 w-full">
+            <Label className="text-sm text-neutral-300">Account Type</Label>
+            <RadioGroup
+              defaultValue="seeker"
+              name="role"
+              orientation="horizontal"
+              className="flex gap-4 w-full"
+            >
+              <Radio
+                value="seeker"
+                className="bg-[#1A1A1A] border border-neutral-800 p-3 rounded-lg flex-1 cursor-pointer hover:border-neutral-700 transition-colors"
+              >
+                <Radio.Control>
+                  <Radio.Indicator className="bg-[#6366f1]" />
+                </Radio.Control>
+                <Radio.Content>
+                  <Label className="text-white text-sm cursor-pointer">
+                    Job Seeker
+                  </Label>
+                  <Description className="text-neutral-400 text-xs">
+                    Find jobs
+                  </Description>
+                </Radio.Content>
+              </Radio>
+              <Radio
+                value="recruiter"
+                className="bg-[#1A1A1A] border border-neutral-800 p-3 rounded-lg flex-1 cursor-pointer hover:border-neutral-700 transition-colors"
+              >
+                <Radio.Control>
+                  <Radio.Indicator className="bg-[#6366f1]" />
+                </Radio.Control>
+                <Radio.Content>
+                  <Label className="text-white text-sm cursor-pointer">
+                    Recruiter
+                  </Label>
+                  <Description className="text-neutral-400 text-xs">
+                    Hire talent
+                  </Description>
+                </Radio.Content>
+              </Radio>
+            </RadioGroup>
+          </div>
+
           <TextField
             isRequired
             name="name"
@@ -87,20 +134,6 @@ const SignUpPage = () => {
           </TextField>
 
           <TextField
-            name="imageURL"
-            type="url"
-            className="w-full flex flex-col gap-1"
-          >
-            <Label className="text-sm text-neutral-300">
-              Profile Image URL (Optional)
-            </Label>
-            <Input
-              placeholder="https://example.com/avatar.jpg"
-              className="w-full"
-            />
-          </TextField>
-
-          <TextField
             isRequired
             minLength={8}
             name="password"
@@ -126,7 +159,6 @@ const SignUpPage = () => {
           </Button>
         </Form>
 
-        {/* Footer */}
         {/* Divider */}
         <div className="flex items-center gap-4 mt-6 mb-4">
           <div className="flex-1 border-t border-neutral-800"></div>

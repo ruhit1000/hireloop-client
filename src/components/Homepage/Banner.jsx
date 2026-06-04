@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { FiSearch, FiMapPin, FiBriefcase } from "react-icons/fi";
-import Stats from "./Stats"; 
+import Stats from "./Stats";
+import HeroHeaders from "./HeroHeaders";
 
 export default function Banner() {
   return (
@@ -32,13 +33,7 @@ export default function Banner() {
         </div>
 
         {/* Hero Headers */}
-        <h1 className="text-5xl md:text-6xl font-bold text-white mt-8 text-center tracking-tight">
-          Find Your Dream Job Today
-        </h1>
-        <p className="text-neutral-400 mt-5 text-center max-w-2xl text-lg">
-          HireLoop connects top talent with world-class companies. Browse thousands of
-          curated opportunities and land your next role — faster.
-        </p>
+        <HeroHeaders />
 
         {/* Search Input Box */}
         <div className="mt-10 flex flex-col md:flex-row items-center w-full max-w-4xl bg-[#161616] border border-neutral-800 rounded-3xl md:rounded-full p-2 gap-2 shadow-lg">

@@ -1,11 +1,12 @@
-import React from 'react';
+import DashboardNavLinks from "@/components/Dashboard/DashboardNavLinks";
+import React from "react";
 
 const RecruiterHomePage = () => {
-    return (
-        <div>
-            <h1>I am a Recruiter</h1>
-        </div>
-    );
+  return (
+    <div>
+        <h1 className="text-2xl font-bold mb-4">Welcome to your Recruiter Dashboard</h1>
+    </div>
+  );
 };
 
 export default RecruiterHomePage;

@@ -5,13 +5,23 @@ import { Button } from "@heroui/react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { authClient } from "@/lib/aith-client";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const {data: session} = authClient.useSession();
-  console.log("Current Session:", session); 
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+  const handleLogout = async () => {
+    await authClient.signOut({
+      onSuccess: () => {
+        setIsMenuOpen(false);
+        redirect("/");
+      },
+    });
+  };
 
   const menuItems = [
     { name: "Browse Jobs", pathname: "/jobs" },
@@ -50,17 +60,28 @@ export default function Navbar() {
         {/* Desktop Actions */}
         <div className="hidden md:flex gap-4 items-center">
           <div className="h-6 border-l border-neutral-700 mx-2"></div>
-          <Link
-            href="/signin"
-            className="text-[#818cf8] text-sm hover:text-indigo-300 font-medium transition-colors"
-          >
-            Sign In
-          </Link>
-          <Link href="/signup">
-            <Button className="bg-[#6366f1] text-white px-6 font-medium border-none">
-              Get Started
+          {user ? (
+            <Button
+              onClick={handleLogout}
+              className="bg-red-500/10 text-red-500 hover:bg-red-500/20 px-6 font-medium border-none"
+            >
+              Logout
             </Button>
-          </Link>
+          ) : (
+            <>
+              <Link
+                href="/signin"
+                className="text-[#818cf8] text-sm hover:text-indigo-300 font-medium transition-colors"
+              >
+                Sign In
+              </Link>
+              <Link href="/signup">
+                <Button className="bg-[#6366f1] text-white px-6 font-medium border-none">
+                  Get Started
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -88,18 +109,29 @@ export default function Navbar() {
             </li>
           ))}
           <div className="flex flex-col gap-3 mt-2 border-t border-neutral-800 pt-4">
-            <Link
-              href="/signin"
-              className="text-center w-full py-2 rounded-md text-[#818cf8] bg-indigo-500/10 hover:bg-indigo-500/20"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Sign In
-            </Link>
-            <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
-              <Button className="w-full bg-[#6366f1] text-white border-none">
-                Get Started
+            {user ? (
+              <Button
+                onClick={handleLogout}
+                className="w-full bg-red-500/10 text-red-500 hover:bg-red-500/20 border-none"
+              >
+                Logout
               </Button>
-            </Link>
+            ) : (
+              <>
+                <Link
+                  href="/signin"
+                  className="text-center w-full py-2 rounded-md text-[#818cf8] bg-indigo-500/10 hover:bg-indigo-500/20"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full bg-[#6366f1] text-white border-none">
+                    Get Started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </ul>
       )}

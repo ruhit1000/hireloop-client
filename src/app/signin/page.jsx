@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   Button,
@@ -8,21 +8,35 @@ import {
   Form,
   Input,
   Label,
+  Spinner,
   TextField,
+  toast,
+  Toast,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import { authClient } from "@/lib/aith-client";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 const SignInPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const onSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
     const userData = Object.fromEntries(formData.entries());
+
+    const { data, error } = await authClient.signIn.email({
+      email: userData.email,
+      password: userData.password,
+    });
     
-    // const {data, error} = await authClient.signIn.email({
-    //     email: userData.email,
-    //     password: userData.password
-    // })
+    if (error) {
+      toast.danger(error.message || "An error occurred during sign in");
+    } else {
+      toast.success("Signed in successfully!");
+      redirect("/");
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -30,6 +44,7 @@ const SignInPage = () => {
       <div className="w-full max-w-md bg-[#161616] border border-neutral-800 rounded-3xl p-8 shadow-2xl">
         {/* Header */}
         <div className="text-center mb-8">
+          <Toast.Provider />
           <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
             Welcome back
           </h1>
@@ -66,7 +81,7 @@ const SignInPage = () => {
             type="submit"
             className="w-full bg-[#6366f1] text-white font-medium py-3 rounded-lg mt-2 border-none"
           >
-            Sign In
+            {isLoading ? <Spinner color="current" /> : "Sign In"}
           </Button>
         </Form>
 

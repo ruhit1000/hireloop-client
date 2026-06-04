@@ -9,7 +9,7 @@ const DashBoardNavbar = ({ children }) => {
     <div className="flex h-screen bg-[#0B0B0C] overflow-hidden">
       {/* Left Sidebar - Full Height */}
       <aside className="hidden lg:block w-64 border-r border-neutral-800 py-6 h-full shrink-0">
-        <div className="border-b border-neutral-800 mb-6 px-6">
+        <div className="mb-6 px-6">
           <h3 className="text-lg font-bold text-white mb-5 text-center">
             Dashboard
           </h3>
@@ -36,12 +36,6 @@ const DashBoardNavbar = ({ children }) => {
 
           {/* Right Section */}
           <div className="flex items-center gap-6 ml-4">
-            {/* Notification Bell */}
-            <button className="relative text-neutral-400 hover:text-white transition-colors focus:outline-none">
-              <Bell size={20} />
-              {/* Red Notification Dot */}
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full border border-[#0B0B0C]"></span>
-            </button>
 
             {/* Vertical Divider */}
             <div className="w-px h-8 bg-neutral-800"></div>

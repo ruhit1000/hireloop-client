@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Store } from "lucide-react";
+import RegisterCompanyModal from "./RegisterCompanyModal";
 
 export default function NoCompanyState() {
   return (
@@ -29,12 +30,7 @@ export default function NoCompanyState() {
 
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
-        <Link
-          href="/dashboard/recruiter/company/new"
-          className="bg-white text-black hover:bg-neutral-200 px-6 py-2.5 rounded-lg text-sm font-medium transition-colors"
-        >
-          Register your company
-        </Link>
+        <RegisterCompanyModal />
         <Link
           href="/faq"
           className="bg-transparent border border-neutral-800 hover:bg-[#1A1A1A] text-white px-8 py-2.5 rounded-lg text-sm font-medium transition-colors"

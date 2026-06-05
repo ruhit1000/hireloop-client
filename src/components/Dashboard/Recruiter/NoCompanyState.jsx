@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { Store } from "lucide-react";
-import RegisterCompanyModal from "./RegisterCompanyModal";
+import CompanyFormModal from "./CompanyFormModal";
 
-export default function NoCompanyState() {
+export default function NoCompanyState({ userId }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[75vh] text-center px-4">
       {/* Graphic Representation */}
@@ -30,7 +30,7 @@ export default function NoCompanyState() {
 
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
-        <RegisterCompanyModal />
+        <CompanyFormModal userId={userId} />
         <Link
           href="/faq"
           className="bg-transparent border border-neutral-800 hover:bg-[#1A1A1A] text-white px-8 py-2.5 rounded-lg text-sm font-medium transition-colors"

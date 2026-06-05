@@ -2,20 +2,22 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Upload, MapPin, ChevronDown, Loader2 } from "lucide-react";
+import { Upload, MapPin, ChevronDown, Loader2, Edit2 } from "lucide-react";
 import { toast, Toast, Modal, Button } from "@heroui/react";
-import { createCompany } from "@/lib/actions/companies";
-import { authClient } from "@/lib/auth-client";
+import { createCompany, updateCompany } from "@/lib/actions/companies";
 import { useRouter } from "next/navigation";
 
-const RegisterCompanyModal = () => {
+const CompanyFormModal = ({
+  type = "register",
+  userId,
+  initialData = null,
+}) => {
+  const isEdit = type === "edit";
+
   const [logoFile, setLogoFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(initialData?.logo || null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
-  const { data: session } = authClient.useSession();
-  const userId = session?.user?.id;
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -35,8 +37,13 @@ const RegisterCompanyModal = () => {
 
     const formData = new FormData(e.target);
     let companyData = Object.fromEntries(formData.entries());
+
     companyData.userId = userId;
     companyData.companyStatus = "pending";
+
+    if (isEdit && initialData?.logo) {
+      companyData.logo = initialData.logo;
+    }
 
     try {
       if (logoFile) {
@@ -54,14 +61,36 @@ const RegisterCompanyModal = () => {
         }
       }
 
-      const payload = await createCompany(companyData);
-      if (payload.acknowledged) {
-        toast.success("Company registered successfully!");
+      let isSuccess = false;
+
+      if (isEdit) {
+        const updatePayload = await updateCompany(userId, companyData);
+
+        if (updatePayload.acknowledged || updatePayload.modifiedCount > 0) {
+          isSuccess = true;
+        }
+      } else {
+        const createPayload = await createCompany(companyData);
+        if (createPayload.acknowledged) {
+          isSuccess = true;
+        }
+      }
+
+      if (isSuccess) {
+        toast.success(
+          isEdit
+            ? "Company updated successfully!"
+            : "Company registered successfully!",
+        );
         router.push("/dashboard/recruiter/company");
+      } else {
+        toast.danger("Action failed. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.danger("Failed to register company.");
+      toast.danger(
+        isEdit ? "Failed to update company." : "Failed to register company.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -75,9 +104,17 @@ const RegisterCompanyModal = () => {
     <>
       <Toast.Provider />
       <Modal>
-        <Button className="bg-white text-black hover:bg-neutral-200 px-6 py-2.5 rounded-lg text-sm font-medium transition-colors">
-          Register your company
-        </Button>
+        {isEdit ? (
+          <Button className="flex items-center gap-2 px-4 py-2 bg-[#222222] hover:bg-[#2A2A2A] text-neutral-300 rounded-lg text-sm font-medium transition-colors border border-neutral-700">
+            <Edit2 size={16} />
+            Edit
+          </Button>
+        ) : (
+          <Button className="bg-white text-black hover:bg-neutral-200 px-6 py-2.5 rounded-lg text-sm font-medium transition-colors">
+            Register your company
+          </Button>
+        )}
+
         <Modal.Backdrop>
           <Modal.Container placement="auto">
             <Modal.Dialog className="bg-[#161616] border border-neutral-800 text-white sm:max-w-3xl">
@@ -85,16 +122,18 @@ const RegisterCompanyModal = () => {
 
               <Modal.Header className="border-b border-neutral-800 pb-4">
                 <Modal.Heading className="text-xl font-semibold">
-                  Register New Company
+                  {isEdit ? "Edit Company Profile" : "Register New Company"}
                 </Modal.Heading>
                 <p className="text-sm text-neutral-400 mt-1">
-                  Enter your business details to start hiring on HireLoop.
+                  {isEdit
+                    ? "Update your business details below. Changes will require re-approval."
+                    : "Enter your business details to start hiring on HireLoop."}
                 </p>
               </Modal.Header>
 
               <Modal.Body className="p-6">
                 <form
-                  id="register-company-form"
+                  id="company-form"
                   onSubmit={onSubmit}
                   className="flex flex-col gap-6"
                 >
@@ -105,6 +144,7 @@ const RegisterCompanyModal = () => {
                         required
                         name="name"
                         type="text"
+                        defaultValue={initialData?.name || ""}
                         placeholder="e.g. Acme Corp"
                         className={inputClass}
                       />
@@ -116,7 +156,7 @@ const RegisterCompanyModal = () => {
                         <select
                           required
                           name="industry"
-                          defaultValue=""
+                          defaultValue={initialData?.industry || ""}
                           className={`${inputClass} appearance-none pr-10 cursor-pointer`}
                         >
                           <option value="" disabled>
@@ -143,6 +183,10 @@ const RegisterCompanyModal = () => {
                         <input
                           name="website"
                           type="text"
+                          defaultValue={
+                            initialData?.website?.replace(/^https?:\/\//, "") ||
+                            ""
+                          }
                           placeholder="www.company.com"
                           className={`${inputClass} rounded-l-none`}
                         />
@@ -160,6 +204,7 @@ const RegisterCompanyModal = () => {
                           required
                           name="location"
                           type="text"
+                          defaultValue={initialData?.location || ""}
                           placeholder="City, Country"
                           className={`${inputClass} pl-9`}
                         />
@@ -172,7 +217,7 @@ const RegisterCompanyModal = () => {
                         <select
                           required
                           name="employeeCount"
-                          defaultValue=""
+                          defaultValue={initialData?.employeeCount || ""}
                           className={`${inputClass} appearance-none pr-10 cursor-pointer`}
                         >
                           <option value="" disabled>
@@ -231,6 +276,7 @@ const RegisterCompanyModal = () => {
                       required
                       name="description"
                       rows="4"
+                      defaultValue={initialData?.description || ""}
                       placeholder="Tell us about your company's mission and culture..."
                       className={`${inputClass} resize-y`}
                     ></textarea>
@@ -248,12 +294,14 @@ const RegisterCompanyModal = () => {
                 </Button>
                 <button
                   type="submit"
-                  form="register-company-form"
+                  form="company-form"
                   disabled={isLoading}
-                  className="flex items-center justify-center min-w-35 px-5 py-2.5 rounded-lg bg-white text-black text-sm font-semibold hover:bg-neutral-200 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center min-w-37.5 px-5 py-2.5 rounded-lg bg-white text-black text-sm font-semibold hover:bg-neutral-200 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <Loader2 className="animate-spin text-black" size={18} />
+                  ) : isEdit ? (
+                    "Save Changes"
                   ) : (
                     "Register Company"
                   )}
@@ -267,4 +315,4 @@ const RegisterCompanyModal = () => {
   );
 };
 
-export default RegisterCompanyModal;
+export default CompanyFormModal;

@@ -9,12 +9,20 @@ import {
   AlignLeft,
   Check,
 } from "lucide-react";
+import { createJob } from "@/lib/actions/jobs";
+import { toast, Toast } from "@heroui/react";
+import { redirect } from "next/navigation";
 
 const NewJobPostPage = () => {
   const [isRemote, setIsRemote] = useState(false);
-  const today = new Date().toISOString().split("T")[0];
+  const inputMinDate = new Date().toISOString().split("T")[0];
+  const postedDate = new Date().toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     let jobData = Object.fromEntries(formData.entries());
@@ -22,10 +30,25 @@ const NewJobPostPage = () => {
     // Explicitly add the remote status to our collected data
     jobData.isRemote = isRemote;
     jobData.companyId = "12345"; // Placeholder for actual company ID from auth/session
+    jobData.postedDate = postedDate; // Add the posted date to the job data
+    jobData.jobStatus = "active"; // Default status for new job posts
+    const deadlineDate = new Date(jobData.deadline);
+    jobData.deadline = deadlineDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
 
-    console.log("Collected Job Data:", jobData);
-    alert("Job data collected! Check console.");
-    // You will do the rest here
+    const res = await createJob(jobData);
+
+    if (res.acknowledged) {
+      toast.success("Job posted successfully!");
+      e.target.reset();
+      setIsRemote(false);
+      redirect("/dashboard/recruiter/jobs");
+    } else {
+      toast.danger("Failed to post job. Please try again.");
+    }
   };
 
   const inputStyles =
@@ -34,6 +57,7 @@ const NewJobPostPage = () => {
 
   return (
     <div className="p-6 max-w-4xl mx-auto w-full">
+      <Toast.Provider />
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white mb-1">Post a New Job</h1>
         <p className="text-sm text-neutral-400">
@@ -185,7 +209,7 @@ const NewJobPostPage = () => {
                   required
                   name="deadline"
                   type="date"
-                  min={today}
+                  min={inputMinDate}
                   className={`${inputStyles} pl-9`}
                 />
               </div>

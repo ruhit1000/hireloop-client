@@ -2,42 +2,15 @@ import React from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import RecruiterJobList from "@/components/Dashboard/RecruiterJobList";
+import { getCompanyJobs } from "@/lib/api/jobs";
 
 
-export default function RecruiterJobs() {
-  // Dummy data to feed the list component
-  const dummyJobs = [
-    { 
-      id: 1, 
-      title: "Senior Frontend Developer", 
-      type: "Full-time", 
-      location: "Remote", 
-      postedDate: "Oct 24, 2023", 
-      applicants: 45, 
-      status: "Active" 
-    },
-    { 
-      id: 2, 
-      title: "Product Designer", 
-      type: "Contract", 
-      location: "New York, NY", 
-      postedDate: "Oct 20, 2023", 
-      applicants: 12, 
-      status: "Active" 
-    },
-    { 
-      id: 3, 
-      title: "Backend Engineer", 
-      type: "Full-time", 
-      location: "Remote", 
-      postedDate: "Sep 15, 2023", 
-      applicants: 128, 
-      status: "Closed" 
-    },
-  ];
+export default async function RecruiterJobs() {
+
+  const alljobs = await getCompanyJobs("12345"); // Placeholder for actual company ID
 
   return (
-    <div className="p-6 max-w-6xl mx-auto w-full">
+    <div className="p-6 max-w-6xl mx-auto w-full"> 
       
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -57,7 +30,7 @@ export default function RecruiterJobs() {
 
       {/* Jobs List Section */}
       <section>
-        <RecruiterJobList jobs={dummyJobs} />
+        <RecruiterJobList jobs={alljobs} />
       </section>
 
     </div>

@@ -11,3 +11,13 @@ export async function createJob (newJobData) {
     })
     return res.json();
 }
+
+export async function deleteJob (jobId) {
+    const res = await fetch(`${baseUrl}/api/jobs/${jobId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    return res.json();
+}

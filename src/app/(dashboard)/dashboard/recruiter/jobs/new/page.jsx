@@ -12,6 +12,8 @@ import {
 import { createJob } from "@/lib/actions/jobs";
 import { toast, Toast } from "@heroui/react";
 import { redirect } from "next/navigation";
+import { getCompanyByUserId } from "@/lib/api/company";
+import { authClient } from "@/lib/auth-client";
 
 const NewJobPostPage = () => {
   const [isRemote, setIsRemote] = useState(false);
@@ -22,14 +24,20 @@ const NewJobPostPage = () => {
     year: "numeric",
   });
 
+  const { data: session } = authClient.useSession();
+  const userId = session?.user?.id;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+
+    const companyDetails = await getCompanyByUserId(userId);
+
     let jobData = Object.fromEntries(formData.entries());
 
     // Explicitly add the remote status to our collected data
     jobData.isRemote = isRemote;
-    jobData.companyId = "12345"; // Placeholder for actual company ID from auth/session
+    jobData.companyId = companyDetails?._id;
     jobData.postedDate = postedDate; // Add the posted date to the job data
     jobData.jobStatus = "active"; // Default status for new job posts
     const deadlineDate = new Date(jobData.deadline);

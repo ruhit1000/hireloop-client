@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import RecruiterJobList from "@/components/Dashboard/RecruiterJobList";
 import { getCompanyJobs } from "@/lib/api/jobs";
+import RecruiterJobList from "@/components/Dashboard/Recruiter/RecruiterJobList";
 
 
 export default async function RecruiterJobs() {

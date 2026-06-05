@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar } from "@heroui/react";
 import { Search, Bell } from "lucide-react";
 import { DashBoardSidebar } from "./DashboardSidebar";
-import DashboardNavLinks from "./DashboardNavLinks";
+import DashboardNavLinks from "./Recruiter/DashboardNavLinks";
 
 const DashBoardNavbar = ({ children }) => {
   return (

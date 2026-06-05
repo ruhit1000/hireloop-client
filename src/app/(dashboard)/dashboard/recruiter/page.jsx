@@ -3,8 +3,8 @@ import { headers } from "next/headers";
 import React from "react";
 import DashboardStats from "@/components/Dashboard/DashboardStats";
 import { applicationsData, companiesData, dashboardDummyStats } from "@/Data/data";
-import RecentApplications from "@/components/Dashboard/RecentApplications";
-import MyTopCompanies from "@/components/Dashboard/MyTopCompanies";
+import RecentApplications from "@/components/Dashboard/Recruiter/RecentApplications";
+import MyTopCompanies from "@/components/Dashboard/Recruiter/MyTopCompanies";
 
 const RecruiterHomePage = async () => {
   const session = await auth.api.getSession({

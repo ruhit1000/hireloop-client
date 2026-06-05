@@ -1,6 +1,6 @@
 import { LayoutSideContentLeft } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
-import DashboardNavLinks from "./DashboardNavLinks";
+import DashboardNavLinks from "./Recruiter/DashboardNavLinks";
 
 export function DashBoardSidebar() {
   return (

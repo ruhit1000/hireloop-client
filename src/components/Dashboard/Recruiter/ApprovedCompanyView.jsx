@@ -87,8 +87,8 @@ export default function ApprovedCompanyView({ company, userId }) {
 
           {/* Action Buttons */}
           <div className="flex sm:flex-col flex-row items-center sm:items-end gap-3 shrink-0 w-full sm:w-auto mt-4 md:mt-0 pt-6 md:pt-0 border-t border-neutral-800 md:border-none">
-            <CompanyFormModal type="edit" initialData={company} userId={userId} />
-            <CompanyDeleteAlert title={company?.name} userId={userId} />
+            <CompanyFormModal type="edit" initialData={company} />
+            <CompanyDeleteAlert title={company?.name} id={company?._id} />
           </div>
         </div>
       </div>

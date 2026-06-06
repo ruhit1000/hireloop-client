@@ -5,11 +5,11 @@ import { AlertDialog, Button, toast, Toast } from "@heroui/react";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export function CompanyDeleteAlert({ title, userId }) {
+export function CompanyDeleteAlert({ title, id }) {
   const router = useRouter();
 
-  const handleDelete = async (userId) => {
-    const res = await deleteCompany(userId);
+  const handleDelete = async (id) => {
+    const res = await deleteCompany(id);
     if (res.acknowledged) {
       router.refresh();
     } else {
@@ -57,7 +57,7 @@ export function CompanyDeleteAlert({ title, userId }) {
                 slot="close"
                 variant="danger"
                 className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm font-semibold hover:bg-red-600 transition-colors"
-                onPress={() => handleDelete(userId)}
+                onPress={() => handleDelete(id)}
               >
                 Delete Company
               </Button>

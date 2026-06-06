@@ -1,23 +1,11 @@
 'use server';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-export async function createJob (newJobData) {
-    const res = await fetch(`${baseUrl}/api/jobs`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newJobData),
-    })
-    return res.json();
+import { serverDelete, serverMutation } from "../core/server";
+
+export const createJob = async (newJobData) => {
+    return serverMutation("jobs", "POST", newJobData);
 }
 
-export async function deleteJob (jobId) {
-    const res = await fetch(`${baseUrl}/api/jobs/${jobId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-    return res.json();
+export const deleteJob = async (jobId) => {
+    return serverDelete(`jobs/${jobId}`);
 }

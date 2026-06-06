@@ -3,15 +3,12 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { getCompanyJobs } from "@/lib/api/jobs";
 import RecruiterJobList from "@/components/Dashboard/Recruiter/RecruiterJobList";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { getCompanyByUserId } from "@/lib/api/company";
+import { getUserSession } from "@/lib/core/session";
 
 export default async function RecruiterJobs() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-  const userId = session?.user?.id;
+  const user = await getUserSession();
+  const userId = user?.id;
 
   const companyDetails = await getCompanyByUserId(userId);
   const companyId = companyDetails?._id;

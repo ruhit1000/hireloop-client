@@ -85,7 +85,7 @@ export default function PendingCompanyCard({ company, userId }) {
         {/* Action Buttons */}
         <div className="flex items-center gap-3 shrink-0 border-t border-neutral-800 md:border-none pt-4 md:pt-0 mt-4 md:mt-0 w-full md:w-auto">
           <CompanyFormModal type="edit" initialData={company} userId={userId} />
-          <CompanyDeleteAlert title={company.name} userId={userId} />
+          <CompanyDeleteAlert title={company.name} id={company._id} />
         </div>
       </div>
     </div>

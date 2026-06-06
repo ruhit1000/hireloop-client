@@ -2,15 +2,11 @@ import NoCompanyState from "@/components/Dashboard/Recruiter/NoCompanyState";
 import PendingCompanyCard from "@/components/Dashboard/Recruiter/PendingCompanyCard";
 import ApprovedCompanyView from "@/components/Dashboard/Recruiter/ApprovedCompanyView";
 import { getCompanyByUserId } from "@/lib/api/company";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import React from "react";
+import { getUserSession } from "@/lib/core/session";
 
 const MyCompanyPage = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-  const user = session?.user;
+  const user = await getUserSession();
   const userId = user?.id;
 
   const companyInfo = await getCompanyByUserId(userId);

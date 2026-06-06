@@ -64,7 +64,8 @@ const CompanyFormModal = ({
       let isSuccess = false;
 
       if (isEdit) {
-        const updatePayload = await updateCompany(userId, companyData);
+        const id = initialData._id;
+        const updatePayload = await updateCompany(id, companyData);
 
         if (updatePayload.acknowledged || updatePayload.modifiedCount > 0) {
           isSuccess = true;

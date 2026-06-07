@@ -41,7 +41,7 @@ export function CompanyDeleteAlert({ title, id }) {
             <AlertDialog.Body>
               <p className="text-sm text-neutral-400">
                 This will permanently delete <strong>{title}</strong> company and all
-                associated data. This action cannot be undone.
+                associated jobs and data. This action cannot be undone.
               </p>
             </AlertDialog.Body>
 

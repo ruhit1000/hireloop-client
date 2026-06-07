@@ -4,3 +4,4 @@ export const getCompanyJobs = async (companyId) => {
     const res = await fetch(`${baseUrl}/api/jobs/${companyId}`);
     return res.json();
 }
+

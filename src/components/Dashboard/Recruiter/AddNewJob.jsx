@@ -13,7 +13,7 @@ import { createJob } from "@/lib/actions/jobs";
 import { toast, Toast } from "@heroui/react";
 import { redirect } from "next/navigation";
 
-const AddNewJob = (companyId) => {
+const AddNewJob = ({ company }) => {
   const [isRemote, setIsRemote] = useState(false);
   const inputMinDate = new Date().toISOString().split("T")[0];
   const postedDate = new Date().toLocaleDateString("en-US", {
@@ -21,6 +21,9 @@ const AddNewJob = (companyId) => {
     day: "numeric",
     year: "numeric",
   });
+  const companyId = company._id;
+  const companyName = company.name;
+  const companyLogo = company.logo;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +42,8 @@ const AddNewJob = (companyId) => {
       day: "numeric",
       year: "numeric",
     });
+    jobData.companyName = companyName;
+    jobData.companyLogo = companyLogo;
 
     const res = await createJob(jobData);
 

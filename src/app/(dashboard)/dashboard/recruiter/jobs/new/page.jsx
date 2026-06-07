@@ -28,7 +28,7 @@ const AddNewJobPage = async () => {
       </div>
     );
   } else {
-    return <AddNewJob companyId={companyId} />;
+    return <AddNewJob company={companyDetails} />;
   }
 };
 

@@ -33,13 +33,15 @@ export default function Navbar() {
     <nav className="fixed top-4 inset-x-0 mx-auto max-w-6xl rounded-2xl bg-[#1A1A1A]/80 backdrop-blur-md border border-neutral-800 shadow-xl z-50 flex flex-col px-6 py-3">
       <div className="flex items-center justify-between w-full">
         {/* Brand */}
-        <Link href="/" className="font-bold text-2xl tracking-tighter">
+        <Link href="/">
           <Image
             src="/images/logo.png"
             alt="Hireloop Logo"
             width={120}
             height={32}
             priority
+            className="object-contain"
+            style={{ width: "auto", height: "auto" }}
           />
         </Link>
 

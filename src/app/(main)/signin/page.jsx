@@ -29,7 +29,6 @@ const SignInPage = () => {
       email: userData.email,
       password: userData.password,
     });
-    console.log("Sign in response:", { data, error });
     
     if (error) {
       toast.danger(error.message || "An error occurred during sign in");

@@ -47,7 +47,7 @@ const JobApply = ({ jobDetails, applicant }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B0C] pt-30  px-4 flex justify-center items-start">
+    <div className="px-4 flex justify-center items-start">
         <Toast.Provider />
       <div className="max-w-2xl w-full">
         {/* Header Section */}

@@ -6,9 +6,10 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { data: session } = authClient.useSession();
@@ -18,7 +19,7 @@ export default function Navbar() {
     await authClient.signOut({
       onSuccess: () => {
         setIsMenuOpen(false);
-        redirect("/");
+        router.refresh();
       },
     });
   };

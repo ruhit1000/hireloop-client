@@ -18,10 +18,13 @@ import {
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SignUpPage = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect") || "/";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -33,14 +36,14 @@ const SignUpPage = () => {
       email: UserData.email,
       password: UserData.password,
       name: UserData.name,
-      role: UserData.role, // "seeker" or "recruiter" collected here
+      role: UserData.role,
     });
 
     if (error) {
       toast.danger(error.message || "An error occurred during sign up.");
     } else {
       toast.success("Account created successfully! Please sign in.");
-      redirect("/signin");
+      router.push(redirectUrl);
     }
     setIsLoading(false);
   };
@@ -181,7 +184,7 @@ const SignUpPage = () => {
         <p className="text-center text-neutral-400 text-sm mt-6">
           Already have an account?{" "}
           <Link
-            href="/signin"
+            href={`/signin?redirect=${redirectUrl}`}
             className="text-[#818cf8] hover:text-indigo-300 font-medium transition-colors"
           >
             Sign In

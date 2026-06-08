@@ -15,9 +15,14 @@ import {
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SignInPage = () => {
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect") || "/";
+
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +39,7 @@ const SignInPage = () => {
       toast.danger(error.message || "An error occurred during sign in");
     } else {
       toast.success("Signed in successfully!");
-      redirect("/");
+      router.push(redirectUrl);
     }
     setIsLoading(false);
   };
@@ -107,7 +112,7 @@ const SignInPage = () => {
         <p className="text-center text-neutral-400 text-sm mt-6">
           Don't have an account?{" "}
           <Link
-            href="/signup"
+            href={`/signup?redirect=${redirectUrl}`}
             className="text-[#818cf8] hover:text-indigo-300 font-medium transition-colors"
           >
             Sign Up

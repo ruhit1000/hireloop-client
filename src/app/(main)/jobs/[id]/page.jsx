@@ -191,9 +191,12 @@ const JobDetailsPage = async ({ params }) => {
                 </div>
               </div>
 
-              <button className="w-full bg-[#6366f1] hover:bg-indigo-500 text-white font-semibold py-3.5 rounded-xl transition-colors shadow-lg shadow-indigo-500/20 cursor-pointer">
+              <Link
+                href={`/jobs/${jobDetails._id}/apply`}
+                className="flex items-center justify-center w-full bg-linear-to-r from-sky-500 to-orange-500 hover:from-sky-400 hover:to-orange-400 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-[0.98]"
+              >
                 Apply Now
-              </button>
+              </Link>
 
               <p className="text-center text-neutral-500 text-xs mt-4">
                 You will be redirected to the application form.

@@ -14,3 +14,8 @@ export const getJobById = async (jobId) => {
     const res = await fetch(`${baseUrl}/api/jobs/${jobId}`);
     return res.json();
 }
+
+export const getFeaturedJobs = async () => {
+    const res = await fetch(`${baseUrl}/api/jobs?featured=true`);
+    return res.json();
+}

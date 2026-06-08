@@ -20,3 +20,8 @@ export const serverDelete = async (path) => {
     });
     return res.json();
 }
+
+export const serverFetch = async (path) => {
+    const res = await fetch(`${baseUrl}/api/${path}`);
+    return res.json();
+}

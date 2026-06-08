@@ -1,6 +1,5 @@
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+import { serverFetch } from "../core/server";
 
 export const getCompanyByUserId = async (userId) => {
-    const res = await fetch(`${baseUrl}/api/companies/${userId}`);
-    return res.json();
+    return serverFetch(`companies/${userId}`);
 }

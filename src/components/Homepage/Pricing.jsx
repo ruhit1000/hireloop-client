@@ -1,60 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { Crown, BarChart2, Zap, Plus, ArrowRight } from "lucide-react";
+import { Plus, ArrowRight } from "lucide-react";
+import { jobSeekerPlans, recruiterPlans } from "@/Data/data";
 
 export default function Pricing() {
-  const [isYearly, setIsYearly] = useState(false);
+  const [isRecruiter, setIsRecruiter] = useState(false);
 
-  const plans = [
-    {
-      name: "Starter",
-      price: "0",
-      icon: Crown,
-      iconColor: "text-pink-400",
-      description: "Start building your insights hub:",
-      features: [
-        "Daily AI match brief (top 5)",
-        "Verified salary bands",
-        "Company insight dashboards",
-        "1-click apply, unlimited",
-      ],
-      isHighlighted: false,
-    },
-    {
-      name: "Growth",
-      price: isYearly ? "12" : "17", // Example yearly discount calculation
-      icon: BarChart2,
-      iconColor: "text-purple-400",
-      description: "Start building your insights hub:",
-      features: [
-        "Daily AI match brief (top 5)",
-        "Verified salary bands",
-        "Company insight dashboards",
-        "1-click apply, unlimited",
-      ],
-      isHighlighted: true,
-    },
-    {
-      name: "Premium",
-      price: isYearly ? "79" : "99",
-      icon: Zap,
-      iconColor: "text-blue-400",
-      description: "Start building your insights hub:",
-      features: [
-        "Everything in Pro",
-        "Multi-profile career portfolios",
-        "Shared talent rooms",
-        "Recruiter view (read-only)",
-      ],
-      isHighlighted: false,
-    },
-  ];
+  const currentPlans = isRecruiter ? recruiterPlans : jobSeekerPlans;
 
   return (
-    <section id="pricing" className="bg-[#0B0B0C] py-24 px-6 border-b border-neutral-900">
+    <section
+      id="pricing"
+      className="bg-[#0B0B0C] py-24 px-6 border-b border-neutral-900"
+    >
       <div className="max-w-6xl mx-auto flex flex-col items-center">
-        
         {/* Header Section */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-1.5 h-1.5 bg-indigo-500 rounded-sm"></div>
@@ -63,7 +23,7 @@ export default function Pricing() {
           </span>
           <div className="w-1.5 h-1.5 bg-indigo-500 rounded-sm"></div>
         </div>
-        
+
         <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-10 tracking-tight leading-tight">
           Pay for the leverage, <br /> not the listings
         </h2>
@@ -71,29 +31,30 @@ export default function Pricing() {
         {/* Toggle Switch */}
         <div className="flex items-center bg-[#1A1A1A] border border-neutral-800 p-1.5 rounded-full mb-16">
           <button
-            onClick={() => setIsYearly(false)}
+            onClick={() => setIsRecruiter(false)}
             className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
-              !isYearly ? "bg-white text-black" : "text-neutral-400 hover:text-white"
+              !isRecruiter
+                ? "bg-white text-black"
+                : "text-neutral-400 hover:text-white"
             }`}
           >
-            Monthly
+            For Job Seekers
           </button>
           <button
-            onClick={() => setIsYearly(true)}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${
-              isYearly ? "bg-white text-black" : "text-neutral-400 hover:text-white"
+            onClick={() => setIsRecruiter(true)}
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+              isRecruiter
+                ? "bg-white text-black"
+                : "text-neutral-400 hover:text-white"
             }`}
           >
-            Yearly
-            <span className="bg-[#d946ef] text-white text-[10px] px-2 py-0.5 rounded-full font-bold tracking-wide">
-              25%
-            </span>
+            For Recruiters
           </button>
         </div>
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
-          {plans.map((plan, index) => {
+          {currentPlans.map((plan, index) => {
             const Icon = plan.icon;
             return (
               <div
@@ -109,13 +70,19 @@ export default function Pricing() {
                   <div className="w-8 h-8 rounded-md bg-[#1A1A1A] border border-neutral-800 flex items-center justify-center">
                     <Icon className={`w-4 h-4 ${plan.iconColor}`} />
                   </div>
-                  <h3 className="text-xl text-white font-medium">{plan.name}</h3>
+                  <h3 className="text-xl text-white font-medium">
+                    {plan.name}
+                  </h3>
                 </div>
 
                 {/* Price */}
                 <div className="flex items-baseline gap-1 mb-8 border-b border-neutral-800/50 pb-8">
-                  <span className="text-5xl font-bold text-white">${plan.price}</span>
-                  <span className="text-neutral-500 text-sm">/month</span>
+                  <span className="text-5xl font-bold text-white">
+                    ${plan.price}
+                  </span>
+                  <span className="text-neutral-500 text-sm">
+                    {plan.period}
+                  </span>
                 </div>
 
                 {/* Features */}

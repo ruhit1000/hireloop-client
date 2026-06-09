@@ -105,16 +105,23 @@ export default function Pricing() {
                 </div>
 
                 {/* CTA Button */}
-                <button
-                  className={`mt-10 w-full py-4 rounded-xl flex items-center justify-between px-6 text-sm font-medium transition-colors ${
-                    plan.isHighlighted
-                      ? "bg-white text-black hover:bg-neutral-200"
-                      : "bg-[#262626] text-white hover:bg-[#333333]"
-                  }`}
-                >
-                  Choose This Plan
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                <form action="/api/checkout_sessions" method="POST">
+                  <input type="hidden" name="plan_id" value={plan.id} />
+                  <section>
+                    <button
+                      type="submit"
+                      role="link"
+                      className={`mt-10 w-full py-4 rounded-xl flex items-center justify-between px-6 text-sm font-medium transition-colors ${
+                        plan.isHighlighted
+                          ? "bg-white text-black hover:bg-neutral-200"
+                          : "bg-[#262626] text-white hover:bg-[#333333]"
+                      }`}
+                    >
+                      Choose This Plan
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </section>
+                </form>
               </div>
             );
           })}

@@ -106,6 +106,7 @@ export const companiesData = [
 export const jobSeekerPlans = [
   {
     name: "Free",
+    id: "seeker_free",
     price: "0",
     period: "/forever",
     icon: Crown,
@@ -121,6 +122,7 @@ export const jobSeekerPlans = [
   },
   {
     name: "Pro",
+    id: "seeker_pro",
     price: "19",
     period: "/month",
     icon: BarChart2,
@@ -136,6 +138,7 @@ export const jobSeekerPlans = [
   },
   {
     name: "Premium",
+    id: "seeker_premium",
     price: "39",
     period: "/month",
     icon: Zap,
@@ -155,6 +158,7 @@ export const jobSeekerPlans = [
 export const recruiterPlans = [
   {
     name: "Free",
+    id: "recruiter_free",
     price: "0",
     period: "/forever",
     icon: Crown,
@@ -169,6 +173,7 @@ export const recruiterPlans = [
   },
   {
     name: "Growth",
+    id: "recruiter_growth",
     price: "49",
     period: "/month",
     icon: BarChart2,
@@ -184,6 +189,7 @@ export const recruiterPlans = [
   },
   {
     name: "Enterprise",
+    id: "recruiter_enterprise",
     price: "149",
     period: "/month",
     icon: Zap,

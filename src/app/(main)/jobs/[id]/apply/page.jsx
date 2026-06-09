@@ -6,6 +6,7 @@ import Link from "next/link";
 import JobApply from "./JobApply";
 import { getApplicationsByApplicantId } from "@/lib/api/applications";
 import { AlertCircle, Crown, Info } from "lucide-react";
+import { getPlanById } from "@/lib/api/plans";
 
 const ApplyPage = async ({ params }) => {
   const { id } = await params;
@@ -30,11 +31,7 @@ const ApplyPage = async ({ params }) => {
   const applications = await getApplicationsByApplicantId(user.id);
   const jobDetails = await getJobById(id);
 
-  // Hardcoded plan logic (to be replaced with DB data later)
-  const plan = {
-    name: "Free",
-    maxApplicationsPerMonth: 3,
-  };
+  const plan = await getPlanById(user?.plan || "seeker_free");
 
   const totalApplied = applications.length;
   const isLimitReached = totalApplied >= plan.maxApplicationsPerMonth;

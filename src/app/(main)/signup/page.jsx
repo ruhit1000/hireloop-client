@@ -24,7 +24,7 @@ const SignUpPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirect") || "/";
+  const redirectUrl = searchParams.get("redirect") || "/signin";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -32,11 +32,14 @@ const SignUpPage = () => {
     const formData = new FormData(e.target);
     const UserData = Object.fromEntries(formData.entries());
 
+    const plan = UserData.role === "seeker" ? "seeker_free" : "recruiter_free";
+
     const { data, error } = await authClient.signUp.email({
       email: UserData.email,
       password: UserData.password,
       name: UserData.name,
       role: UserData.role,
+      plan,
     });
 
     if (error) {

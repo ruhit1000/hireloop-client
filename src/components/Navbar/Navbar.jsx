@@ -33,6 +33,7 @@ export default function Navbar() {
   const dashboardPath = {
     seeker: "/dashboard/seeker",
     recruiter: "/dashboard/recruiter",
+    admin: "/dashboard/admin",
   };
 
   if (user?.email) {

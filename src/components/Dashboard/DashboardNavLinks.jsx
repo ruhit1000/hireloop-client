@@ -11,7 +11,8 @@ import {
   Settings,
   Search,
   Bookmark,
-  CreditCard,
+  CreditCard, 
+  Users, 
 } from "lucide-react";
 
 const DashboardNavLinks = ({ role }) => {
@@ -74,9 +75,43 @@ const DashboardNavLinks = ({ role }) => {
     },
   ];
 
+  const adminNavItems = [
+    {
+      icon: LayoutDashboard,
+      label: "Dashboard",
+      pathname: "/dashboard/admin",
+    },
+    {
+      icon: Users,
+      label: "Users",
+      pathname: "/dashboard/admin/users",
+    },
+    {
+      icon: Building2,
+      label: "Companies",
+      pathname: "/dashboard/admin/companies",
+    },
+    {
+      icon: Briefcase,
+      label: "Jobs",
+      pathname: "/dashboard/admin/jobs",
+    },
+    {
+      icon: CreditCard,
+      label: "Payments",
+      pathname: "/dashboard/admin/payments",
+    },
+    {
+      icon: Settings,
+      label: "Settings",
+      pathname: "/dashboard/admin/settings",
+    },
+  ];
+
   const navItemsMap = {
     recruiter: recruiterNavItems,
     seeker: seekerNavItems,
+    admin: adminNavItems,
   };
 
   const navItems = navItemsMap[role || "seeker"];

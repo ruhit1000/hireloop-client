@@ -19,7 +19,7 @@ export default function DashboardStats({ stats }) {
             
             {/* Text Content */}
             <div className="flex flex-col gap-1.5">
-              <span className="text-xs text-neutral-400 font-medium tracking-wide">
+              <span className="text-sm text-neutral-400 font-medium tracking-wide">
                 {stat.name}
               </span>
               <span className="text-2xl font-semibold text-white tracking-tight">

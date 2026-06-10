@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardStats from "@/components/Dashboard/DashboardStats";
+import DashboardStats from "@/components/Dashboard/Recruiter/DashboardStats";
 import { applicationsData, companiesData, dashboardDummyStats } from "@/Data/data";
 import RecentApplications from "@/components/Dashboard/Recruiter/RecentApplications";
 import MyTopCompanies from "@/components/Dashboard/Recruiter/MyTopCompanies";

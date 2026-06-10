@@ -60,17 +60,17 @@ const DashboardNavLinks = ({ role }) => {
     {
       icon: FileText,
       label: "Applications",
-      pathname: "/dashboard/applications",
+      pathname: "/dashboard/seeker/applications",
     },
     {
       icon: CreditCard,
       label: "Billing",
-      pathname: "/dashboard/billing",
+      pathname: "/dashboard/seeker/billing",
     },
     {
       icon: Settings,
       label: "Settings",
-      pathname: "/dashboard/settings",
+      pathname: "/dashboard/seeker/settings",
     },
   ];
 

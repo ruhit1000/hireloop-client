@@ -1,7 +1,7 @@
 import React from "react";
 import { House, Search } from "lucide-react";
 import { DashBoardSidebar } from "./DashboardSidebar";
-import DashboardNavLinks from "./Recruiter/DashboardNavLinks";
+import DashboardNavLinks from "./DashboardNavLinks";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { getUserSession } from "@/lib/core/session";

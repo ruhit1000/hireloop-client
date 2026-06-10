@@ -22,6 +22,8 @@ export const serverDelete = async (path) => {
 }
 
 export const serverFetch = async (path) => {
-    const res = await fetch(`${baseUrl}/api/${path}`);
+    const res = await fetch(`${baseUrl}/api/${path}`, {
+        cache: "no-store"
+    });
     return res.json();
 }

@@ -38,7 +38,7 @@ const CompanyFormModal = ({
     const formData = new FormData(e.target);
     let companyData = Object.fromEntries(formData.entries());
 
-    companyData.userId = userId;
+    companyData.recruiterId = userId;
     companyData.companyStatus = "pending";
 
     if (isEdit && initialData?.logo) {

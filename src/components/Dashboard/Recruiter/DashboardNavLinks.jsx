@@ -9,15 +9,30 @@ import {
   Briefcase,
   FileText,
   Settings,
+  Search,
+  Bookmark,
+  CreditCard,
 } from "lucide-react";
 
-const DashboardNavLinks = () => {
+const DashboardNavLinks = ({ role }) => {
   const pathname = usePathname();
 
-  const navItems = [
-    { icon: LayoutDashboard, label: "Dashboard", pathname: "/dashboard/recruiter" },
-    { icon: Building2, label: "My Company", pathname: "/dashboard/recruiter/company" },
-    { icon: Briefcase, label: "Manage Jobs", pathname: "/dashboard/recruiter/jobs" },
+  const recruiterNavItems = [
+    {
+      icon: LayoutDashboard,
+      label: "Dashboard",
+      pathname: "/dashboard/recruiter",
+    },
+    {
+      icon: Building2,
+      label: "My Company",
+      pathname: "/dashboard/recruiter/company",
+    },
+    {
+      icon: Briefcase,
+      label: "Manage Jobs",
+      pathname: "/dashboard/recruiter/jobs",
+    },
     {
       icon: FileText,
       label: "Applications",
@@ -25,6 +40,46 @@ const DashboardNavLinks = () => {
     },
     { icon: Settings, label: "Settings", pathname: "/dashboard/settings" },
   ];
+
+  const seekerNavItems = [
+    {
+      icon: LayoutDashboard,
+      label: "Dashboard",
+      pathname: "/dashboard/seeker",
+    },
+    {
+      icon: Search,
+      label: "Jobs",
+      pathname: "/jobs",
+    },
+    {
+      icon: Bookmark,
+      label: "Saved Jobs",
+      pathname: "/dashboard/seeker/saved-jobs",
+    },
+    {
+      icon: FileText,
+      label: "Applications",
+      pathname: "/dashboard/applications",
+    },
+    {
+      icon: CreditCard,
+      label: "Billing",
+      pathname: "/dashboard/billing",
+    },
+    {
+      icon: Settings,
+      label: "Settings",
+      pathname: "/dashboard/settings",
+    },
+  ];
+
+  const navItemsMap = {
+    recruiter: recruiterNavItems,
+    seeker: seekerNavItems,
+  };
+
+  const navItems = navItemsMap[role || "seeker"];
 
   return (
     <nav className="flex flex-col gap-1 px-4">

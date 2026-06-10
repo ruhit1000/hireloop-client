@@ -1,10 +1,13 @@
 import React from "react";
-import { Avatar } from "@heroui/react";
-import { Search, Bell } from "lucide-react";
+import { House, Search } from "lucide-react";
 import { DashBoardSidebar } from "./DashboardSidebar";
 import DashboardNavLinks from "./Recruiter/DashboardNavLinks";
+import Link from "next/link";
+import { Button } from "@heroui/react";
+import { getUserSession } from "@/lib/core/session";
 
-const DashBoardNavbar = ({ children }) => {
+const DashBoardNavbar = async ({ children }) => {
+  const user = await getUserSession();
   return (
     <div className="flex h-screen bg-[#0B0B0C] overflow-hidden">
       {/* Left Sidebar - Full Height */}
@@ -14,7 +17,7 @@ const DashBoardNavbar = ({ children }) => {
             Dashboard
           </h3>
         </div>
-        <DashboardNavLinks />
+        <DashboardNavLinks role={user?.role} />
       </aside>
 
       {/* Right Content Area */}
@@ -36,25 +39,14 @@ const DashBoardNavbar = ({ children }) => {
 
           {/* Right Section */}
           <div className="flex items-center gap-6 ml-4">
-
             {/* Vertical Divider */}
             <div className="w-px h-8 bg-neutral-800"></div>
 
-            {/* User Profile Info */}
-            <div className="flex items-center gap-3 cursor-pointer group">
-              <div className="flex flex-col items-end">
-                <span className="text-sm font-medium text-white group-hover:text-indigo-400 transition-colors">
-                  Alex Sterling
-                </span>
-                <span className="text-xs text-neutral-500">TechFlow Inc.</span>
-              </div>
-
-              <Avatar
-                src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                size="sm"
-                className="border border-neutral-700"
-              />
-            </div>
+            <Link href="/">
+              <Button variant="outline">
+                <House /> Home
+              </Button>
+            </Link>
           </div>
         </header>
 

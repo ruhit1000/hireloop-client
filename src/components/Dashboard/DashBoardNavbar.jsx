@@ -42,11 +42,14 @@ const DashBoardNavbar = async ({ children }) => {
             {/* Vertical Divider */}
             <div className="w-px h-8 bg-neutral-800"></div>
 
-            <Link href="/">
-              <Button variant="outline">
-                <House /> Home
-              </Button>
-            </Link>
+            <div className="flex items-center gap-4">
+              <h4 className="text-white font-medium">Hello, {user?.name.split(" ")[0]}!</h4>
+              <Link href="/">
+                <Button variant="outline">
+                  <House /> Home
+                </Button>
+              </Link>
+            </div>
           </div>
         </header>
 

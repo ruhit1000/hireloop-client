@@ -1,12 +1,12 @@
 import React from "react";
-import { getAllJobs } from "@/lib/api/jobs";
 import JobCard from "@/components/AllJobs/JobCard";
 import JobFilters from "@/components/AllJobs/JobFilters";
+import { getAllActiveJobs } from "@/lib/api/jobs";
 
 const AlljobsPage = async ({ searchParams }) => {
   const params = await searchParams;
 
-  const jobs = await getAllJobs(params);
+  const jobs = await getAllActiveJobs(params);
 
   return (
     <div className="min-h-screen bg-[#0B0B0C] p-6 pt-26">

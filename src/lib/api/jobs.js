@@ -4,8 +4,8 @@ export const getCompanyJobs = async (companyId, status = "active") => {
   return serverFetch(`jobs?companyId=${companyId}&status=${status}`);
 };
 
-export const getAllJobs = async (searchParams = {}) => {
-  const query = new URLSearchParams();
+export const getAllActiveJobs = async (searchParams = {}) => {
+  const query = new URLSearchParams({ status: "active" });
 
   if (searchParams.query) query.append("search", searchParams.query);
   if (searchParams.type) query.append("type", searchParams.type);

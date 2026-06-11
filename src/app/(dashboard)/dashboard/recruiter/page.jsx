@@ -1,12 +1,6 @@
 import React from "react";
 import DashboardStats from "@/components/Dashboard/Recruiter/DashboardStats";
-import {
-  applicationsData,
-  companiesData,
-  dashboardDummyStats,
-} from "@/Data/data";
 import RecentApplications from "@/components/Dashboard/Recruiter/RecentApplications";
-import MyTopCompanies from "@/components/Dashboard/Recruiter/MyTopCompanies";
 import { getUserSession } from "@/lib/core/session";
 import { getRecruiterStats } from "@/lib/api/stats";
 import { CheckCircle, FileText, Users, Zap } from "lucide-react";
@@ -47,9 +41,8 @@ const RecruiterHomePage = async () => {
         <DashboardStats stats={stats} />
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-6 mt-6 p-4">
-        <RecentApplications applications={applicationsData} />
-        <MyTopCompanies companies={companiesData} />
+      <div className="mt-6 p-4">
+        <RecentApplications applications={recruiterStats.recentApplications} />
       </div>
     </div>
   );

@@ -37,9 +37,9 @@ const DashboardNavLinks = ({ role }) => {
     {
       icon: FileText,
       label: "Applications",
-      pathname: "/dashboard/applications",
+      pathname: "/dashboard/recruiter/applications",
     },
-    { icon: Settings, label: "Settings", pathname: "/dashboard/settings" },
+    { icon: Settings, label: "Settings", pathname: "/dashboard/recruiter/settings" },
   ];
 
   const seekerNavItems = [

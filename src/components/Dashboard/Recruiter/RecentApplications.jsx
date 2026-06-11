@@ -24,7 +24,7 @@ export default function RecentApplications({ applications }) {
       <div className="flex justify-between items-end px-1">
         <h2 className="text-xl font-medium text-white">Recent Applications</h2>
         <Link
-          href="/applications"
+          href="/dashboard/recruiter/applications"
           className="text-sm text-neutral-400 hover:text-white transition-colors"
         >
           View all

@@ -5,11 +5,11 @@ import JobCard from "./JobCard";
 export default function RecruiterJobList({ jobs }) {
   const getStatusStyles = (status) => {
     switch (status) {
-      case "Active":
+      case "active":
         return "text-green-500 bg-green-500/10 border-green-500/20";
-      case "Draft":
+      case "draft":
         return "text-yellow-500 bg-yellow-500/10 border-yellow-500/20";
-      case "Closed":
+      case "closed":
         return "text-red-500 bg-red-500/10 border-red-500/20";
       default:
         return "text-neutral-400 bg-neutral-800 border-neutral-700";

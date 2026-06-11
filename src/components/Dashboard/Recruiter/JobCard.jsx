@@ -1,11 +1,12 @@
-import { Briefcase, MapPin, DollarSign, Edit2, Trash2 } from "lucide-react";
+import { Briefcase, MapPin, DollarSign } from "lucide-react";
 import JobDeleteAlert from "./JobDeleteAlert";
+import { ChangeJobStatus } from "./ChangeJobStatus";
 
 export default function JobCard({ job, getStatusStyles }) {
   const locationDisplay = job.isRemote
     ? "Remote"
     : `${job.city}, ${job.country}`;
-  const currentStatus = job.status || "Active";
+  const currentStatus = job.jobStatus;
 
   return (
     <div className="bg-[#161616] border border-neutral-800 hover:border-neutral-700 transition-colors rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -39,12 +40,9 @@ export default function JobCard({ job, getStatusStyles }) {
         </div>
       </div>
 
-      {/* Action Buttons */}
+      {/* Action Buttons Container */}
       <div className="flex items-center gap-3 shrink-0 border-t border-neutral-800 md:border-none pt-4 md:pt-0 mt-2 md:mt-0">
-        <button className="flex items-center gap-2 px-4 py-2 bg-[#222222] hover:bg-[#2A2A2A] text-neutral-300 rounded-lg text-sm font-medium transition-colors border border-neutral-800">
-          <Edit2 size={16} />
-          Edit
-        </button>
+        <ChangeJobStatus jobId={job._id} currentStatus={currentStatus} />
         <JobDeleteAlert jobTitle={job.jobTitle} jobId={job._id} />
       </div>
     </div>

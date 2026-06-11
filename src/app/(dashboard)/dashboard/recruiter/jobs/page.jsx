@@ -18,7 +18,7 @@ export default async function RecruiterJobs() {
 
   // Only fetch jobs if a company exists and is not rejected
   const alljobs =
-    hasCompany && !isRejected ? await getCompanyJobs(companyId) : [];
+    hasCompany && !isRejected ? await getCompanyJobs(companyId, "all") : [];
 
   return (
     <div className="p-6 max-w-6xl mx-auto w-full">

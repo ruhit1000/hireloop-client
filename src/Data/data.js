@@ -1,37 +1,11 @@
 import {
-  FileText,
-  Users,
   Zap,
-  CheckCircle,
   Globe,
   Building2,
   Hexagon,
   Crown,
   BarChart2,
 } from "lucide-react";
-
-export const dashboardDummyStats = [
-  {
-    icon: FileText,
-    name: "Total Job Posts",
-    data: "48",
-  },
-  {
-    icon: Users,
-    name: "Total Applicants",
-    data: "1,284",
-  },
-  {
-    icon: Zap,
-    name: "Active Jobs",
-    data: "18",
-  },
-  {
-    icon: CheckCircle,
-    name: "Jobs Closed",
-    data: "32",
-  },
-];
 
 export const applicationsData = [
   {

@@ -31,6 +31,7 @@ const JobApply = ({ jobDetails, applicant }) => {
         jobId: jobDetails._id,
         jobTitle: jobDetails.jobTitle,
         companyName: jobDetails.companyName,
+        companyId: jobDetails.companyId,
         status: "Applied",
     }
     const res = await submitApplication(applicationData);

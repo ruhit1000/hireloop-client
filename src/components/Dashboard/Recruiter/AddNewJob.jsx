@@ -33,7 +33,7 @@ const AddNewJob = ({ company }) => {
 
     // Explicitly add the remote status to our collected data
     jobData.isRemote = isRemote;
-    jobData.companyId = companyId.companyId; // Associate the job with the company ID
+    jobData.companyId = companyId; // Associate the job with the company ID
     jobData.postedDate = postedDate; // Add the posted date to the job data
     jobData.jobStatus = "active"; // Default status for new job posts
     const deadlineDate = new Date(jobData.deadline);

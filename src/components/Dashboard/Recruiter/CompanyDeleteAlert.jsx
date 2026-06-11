@@ -10,7 +10,8 @@ export function CompanyDeleteAlert({ title, id }) {
 
   const handleDelete = async (id) => {
     const res = await deleteCompany(id);
-    if (res.acknowledged) {
+    console.log("Delete Company Response:", res);
+    if (res.success) {
       router.refresh();
     } else {
       alert("Failed to delete company. Please try again.");

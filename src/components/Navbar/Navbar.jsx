@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@heroui/react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -11,6 +11,12 @@ import { useRouter } from "next/navigation";
 export default function Navbar() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Run on mount to safely transition client state
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -24,6 +30,7 @@ export default function Navbar() {
     });
   };
 
+  // Base items that match on both server and client initially
   const menuItems = [
     { name: "Browse Jobs", pathname: "/jobs" },
     { name: "Company", pathname: "/company" },
@@ -36,7 +43,8 @@ export default function Navbar() {
     admin: "/dashboard/admin",
   };
 
-  if (user?.email) {
+  // Only append dynamic items after mounting on the client side
+  if (mounted && user?.email) {
     menuItems.push({
       name: "Dashboard",
       pathname: dashboardPath[user?.role || "seeker"],
@@ -76,7 +84,8 @@ export default function Navbar() {
         {/* Desktop Actions */}
         <div className="hidden md:flex gap-4 items-center">
           <div className="h-6 border-l border-neutral-700 mx-2"></div>
-          {user ? (
+          {/* Prevent action block flash during hydration */}
+          {mounted && user ? (
             <Button
               onClick={handleLogout}
               className="bg-red-500/10 text-red-500 hover:bg-red-500/20 px-6 font-medium border-none"
@@ -125,7 +134,7 @@ export default function Navbar() {
             </li>
           ))}
           <div className="flex flex-col gap-3 mt-2 border-t border-neutral-800 pt-4">
-            {user ? (
+            {mounted && user ? (
               <Button
                 onClick={handleLogout}
                 className="w-full bg-red-500/10 text-red-500 hover:bg-red-500/20 border-none"

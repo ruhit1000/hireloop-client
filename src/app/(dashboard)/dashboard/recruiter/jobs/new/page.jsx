@@ -9,7 +9,6 @@ const AddNewJobPage = async () => {
   const userId = user?.id;
   const companyDetails = await getCompanyByUserId(userId);
   const isPending = companyDetails?.companyStatus === "pending";
-  const companyId = companyDetails?._id;
   if (isPending) {
     return (
       <div className="p-6">

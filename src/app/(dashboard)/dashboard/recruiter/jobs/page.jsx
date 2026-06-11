@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Plus, Clock, Building2 } from "lucide-react"; // Added Building2 icon
+import { Plus, Clock, Building2, XCircle } from "lucide-react";
 import { getCompanyJobs } from "@/lib/api/jobs";
 import RecruiterJobList from "@/components/Dashboard/Recruiter/RecruiterJobList";
 import { getCompanyByUserId } from "@/lib/api/company";
@@ -13,10 +13,12 @@ export default async function RecruiterJobs() {
   const companyDetails = await getCompanyByUserId(userId);
   const hasCompany = Object.keys(companyDetails || {}).length > 0;
   const isPending = companyDetails?.companyStatus === "pending";
+  const isRejected = companyDetails?.companyStatus === "rejected";
   const companyId = companyDetails?._id;
 
-  // Only fetch jobs if a company exists
-  const alljobs = hasCompany ? await getCompanyJobs(companyId) : [];
+  // Only fetch jobs if a company exists and is not rejected
+  const alljobs =
+    hasCompany && !isRejected ? await getCompanyJobs(companyId) : [];
 
   return (
     <div className="p-6 max-w-6xl mx-auto w-full">
@@ -29,8 +31,8 @@ export default async function RecruiterJobs() {
           </p>
         </div>
 
-        {/* Dynamic Button Logic */}
-        {isPending || !hasCompany ? (
+        {/* Dynamic Button Logic — Disabled if Pending, Rejected, or No Company */}
+        {isPending || isRejected || !hasCompany ? (
           <button
             disabled
             className="flex items-center justify-center gap-2 bg-[#222222] text-neutral-500 border border-neutral-800 px-5 py-2.5 rounded-lg text-sm font-medium cursor-not-allowed"
@@ -89,10 +91,29 @@ export default async function RecruiterJobs() {
             </div>
           )}
 
+          {/* Rejected Banner */}
+          {isRejected && (
+            <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-start gap-3">
+              <XCircle className="text-red-500 mt-0.5 shrink-0" size={20} />
+              <div>
+                <h3 className="text-red-500 font-medium mb-1">
+                  Company Registration Rejected
+                </h3>
+                <p className="text-sm text-red-500/80">
+                  Your corporate verification access has been rejected by system
+                  administrators. Job posting privileges have been suspended.
+                  Please update your workspace info or contact support.
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* Jobs List Section */}
-          <section>
-            <RecruiterJobList jobs={alljobs} />
-          </section>
+          {!isRejected && (
+            <section>
+              <RecruiterJobList jobs={alljobs} />
+            </section>
+          )}
         </>
       )}
     </div>

@@ -5,8 +5,6 @@ import {
   Globe,
   Users,
   Clock,
-  Edit2,
-  Trash2,
   XCircle,
 } from "lucide-react";
 import CompanyFormModal from "./CompanyFormModal";

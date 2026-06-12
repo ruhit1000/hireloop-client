@@ -15,7 +15,7 @@ export const serverMutation = async (path, method, data) => {
     method: method,
     headers: {
       "Content-Type": "application/json",
-      ...(await authHeader()),
+      ...await authHeader(),
     },
     body: JSON.stringify(data),
   });

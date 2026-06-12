@@ -50,7 +50,6 @@ export default function AdminCompaniesTable({ data, emails }) {
   };
 
   const handleApprove = async (companyId) => {
-    console.log("Approve company:", companyId);
     const res = await updateCompany(companyId, { companyStatus: "approved" });
     if (res.acknowledged) {
       toast.success("Company approved successfully!");
@@ -61,7 +60,6 @@ export default function AdminCompaniesTable({ data, emails }) {
   };
 
   const handleReject = async (companyId) => {
-    console.log("Reject company:", companyId);
     const res = await updateCompany(companyId, { companyStatus: "rejected" });
     if (res.acknowledged) {
       toast.success("Company rejected successfully!");

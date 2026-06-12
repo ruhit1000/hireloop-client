@@ -1,10 +1,10 @@
+import SeekerStats from '@/components/Dashboard/Seeker/SeekerStats';
 import React from 'react';
 
 const SeekerDashboard = () => {
     return (
-        <div>
-            <h1>Seeker Dashboard</h1>
-            <p>Welcome to your dashboard!</p>
+        <div className="p-4">
+            <SeekerStats />
         </div>
     );
 };

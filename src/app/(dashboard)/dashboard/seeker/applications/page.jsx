@@ -1,4 +1,4 @@
-import SeekerStats from "@/components/Dashboard/Seeker/SeekerStats";
+import ApplicationStats from "@/components/Dashboard/Seeker/ApplicationsStats";
 import ApplicationsTable from "@/components/Dashboard/Seeker/ApplicationsTable";
 import { getApplicationsByApplicantId } from "@/lib/api/applications";
 import { getUserSession } from "@/lib/core/session";
@@ -16,7 +16,7 @@ const SeekersApplicationPage = async () => {
       </p>
 
       <div className="mb-8">
-        <SeekerStats />
+        <ApplicationStats />
       </div>
 
       <ApplicationsTable applications={applications} />

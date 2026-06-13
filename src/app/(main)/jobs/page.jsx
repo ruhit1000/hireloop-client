@@ -3,13 +3,19 @@ import JobCard from "@/components/AllJobs/JobCard";
 import JobFilters from "@/components/AllJobs/JobFilters";
 import { getAllActiveJobs } from "@/lib/api/jobs";
 import { getUserSession } from "@/lib/core/session";
+import JobsPagination from "@/components/AllJobs/JobsPagination";
 
 const AlljobsPage = async ({ searchParams }) => {
   const params = await searchParams;
 
   const user = await getUserSession();
+  const hasUser = !!user;
 
-  const jobs = await getAllActiveJobs(params);
+  // Now returns our pagination envelope object: { jobs: [], meta: {} }
+  const dataEnvelope = await getAllActiveJobs(params);
+
+  const jobs = dataEnvelope?.jobs || [];
+  const meta = dataEnvelope?.meta || null;
 
   return (
     <div className="min-h-screen bg-[#0B0B0C] p-6 pt-26">
@@ -27,11 +33,19 @@ const AlljobsPage = async ({ searchParams }) => {
 
         {/* Jobs List Section */}
         {jobs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {jobs.map((job) => (
-              <JobCard key={job._id} job={job} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {jobs.map((job) => (
+                <JobCard
+                  key={job._id}
+                  job={job}
+                  hasUser={hasUser} // Forwards session tracking to the card bookmark
+                />
+              ))}
+            </div>
+            {/* Pass the pagination configuration meta wrapper object */}
+            <JobsPagination meta={meta} />
+          </>
         ) : (
           <div className="py-20 text-center border border-dashed border-neutral-800 rounded-2xl">
             <h3 className="text-white text-lg font-medium mb-1">

@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div>
       <Banner />
-      <FeaturedJobs />
+      {/* <FeaturedJobs /> */}
       <Features />
       <Pricing />
       <FAQ />

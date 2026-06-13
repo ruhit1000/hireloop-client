@@ -12,16 +12,13 @@ export const getAllActiveJobs = async (searchParams = {}) => {
   if (searchParams.category) query.append("category", searchParams.category);
   if (searchParams.location) query.append("location", searchParams.location);
 
+  // NEW: Capture pagination parameters from the URL
+  if (searchParams.page) query.append("page", searchParams.page);
+  if (searchParams.perPage) query.append("perPage", searchParams.perPage);
+
   const queryString = query.toString() ? `?${query.toString()}` : "";
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/jobs${queryString}`,
-    {
-      cache: "no-store",
-    },
-  );
-
-  return res.json();
+  return serverFetch(`jobs${queryString}`);
 };
 
 export const getJobById = async (jobId) => {

@@ -1,9 +1,9 @@
 import { headers } from "next/headers";
-import { serverFetch } from "../core/server";
+import { protectedFetch} from "../core/server";
 import { auth } from "../auth";
 
 export const getUserById = async (userId) => {
-  return serverFetch(`users/${userId}`);
+  return protectedFetch(`users/${userId}`);
 };
 
 export const getUsersList = async () => {

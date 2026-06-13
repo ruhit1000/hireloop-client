@@ -1,7 +1,7 @@
-import { protectedFetch, serverFetch } from "../core/server";
+import { protectedFetch } from "../core/server";
 
 export const getCompanyByUserId = async (userId) => {
-    return serverFetch(`companies/${userId}`);
+    return protectedFetch(`companies/${userId}`);
 }
 
 export const getCompanies = async (page = 1, limit = 5, status = "all") => {

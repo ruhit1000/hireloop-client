@@ -1,4 +1,4 @@
-import { serverFetch } from "../core/server";
+import { protectedFetch, serverFetch } from "../core/server";
 
 export const getCompanyJobs = async (companyId, status = "active") => {
   return serverFetch(`jobs?companyId=${companyId}&status=${status}`);
@@ -25,7 +25,7 @@ export const getAllActiveJobs = async (searchParams = {}) => {
 };
 
 export const getJobById = async (jobId) => {
-  return serverFetch(`jobs/${jobId}`);
+  return protectedFetch(`jobs/${jobId}`);
 };
 
 export const getFeaturedJobs = async () => {

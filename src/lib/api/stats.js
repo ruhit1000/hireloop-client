@@ -1,5 +1,5 @@
-import { serverFetch } from "../core/server";
+import { protectedFetch } from "../core/server";
 
 export const getRecruiterStats = async (recruiterId) => {
-    return serverFetch(`recruiter-stats?recruiterId=${recruiterId}`);
+    return protectedFetch(`recruiter-stats?recruiterId=${recruiterId}`);
 };

@@ -2,9 +2,12 @@ import React from "react";
 import JobCard from "@/components/AllJobs/JobCard";
 import JobFilters from "@/components/AllJobs/JobFilters";
 import { getAllActiveJobs } from "@/lib/api/jobs";
+import { getUserSession } from "@/lib/core/session";
 
 const AlljobsPage = async ({ searchParams }) => {
   const params = await searchParams;
+
+  const user = await getUserSession();
 
   const jobs = await getAllActiveJobs(params);
 

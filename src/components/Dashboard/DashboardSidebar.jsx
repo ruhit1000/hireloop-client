@@ -1,14 +1,14 @@
 import { LayoutSideContentLeft } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import DashboardNavLinks from "./DashboardNavLinks";
+import { Menu } from "lucide-react";
 
 export function DashBoardSidebar() {
   return (
     <>
       <Drawer>
         <Button className="lg:hidden" variant="secondary">
-          <LayoutSideContentLeft />
-          Menu
+          <Menu />
         </Button>
         <Drawer.Backdrop>
           <Drawer.Content placement="left">

@@ -2,10 +2,13 @@ import React from "react";
 import ProfileInformation from "@/components/Dashboard/Seeker/ProfileInformation";
 import ResumeUpload from "@/components/Dashboard/Seeker/ResumeUpload";
 import ProfessionalDetails from "@/components/Dashboard/Seeker/ProfessionalDetails";
+import MaintenanceAlert from "@/components/MaintenanceAlert";
 
 export default function SeekerSettingsPage() {
   return (
     <div className="min-h-screen bg-[#0B0B0C] text-white p-6">
+      <MaintenanceAlert pageName="Settings" />
+
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header Section */}
         <div className="border-b border-neutral-900 pb-6">

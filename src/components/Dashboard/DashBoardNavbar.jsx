@@ -27,26 +27,15 @@ const DashBoardNavbar = async ({ children }) => {
           {/* Search Input */}
           <div className="flex items-center gap-4">
             <DashBoardSidebar />
-            <div className="flex items-center md:w-2xl bg-[#161616] border border-neutral-800 hover:border-neutral-700 rounded-lg h-10 px-3 transition-colors">
-              <Search className="text-neutral-500 shrink-0" size={18} />
-              <input
-                type="text"
-                placeholder="Search applications, jobs, or talent..."
-                className="w-full bg-transparent text-sm text-white placeholder-neutral-500 outline-none ml-3"
-              />
-            </div>
           </div>
 
           {/* Right Section */}
           <div className="flex items-center gap-6 ml-4">
-            {/* Vertical Divider */}
-            <div className="w-px h-8 bg-neutral-800"></div>
-
             <div className="flex items-center gap-4">
               <h4 className="text-white font-medium">Hello, {user?.name.split(" ")[0]}!</h4>
               <Link href="/">
                 <Button variant="outline">
-                  <House /> Home
+                  <House />
                 </Button>
               </Link>
             </div>

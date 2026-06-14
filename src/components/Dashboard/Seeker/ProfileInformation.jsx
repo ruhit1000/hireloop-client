@@ -30,7 +30,7 @@ export default function ProfileInformation() {
           <button className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-[#262626] border border-neutral-800 hover:border-neutral-700 text-white transition-all cursor-pointer">
             Change Avatar
           </button>
-          <p className="text-[10px] text-neutral-500">JPG, GIF or PNG. Max size of 5MB.</p>
+          <p className="text-[10px] text-neutral-500 mt-2">JPG, GIF or PNG. Max size of 5MB.</p>
         </div>
       </div>
 

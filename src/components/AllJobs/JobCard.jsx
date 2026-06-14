@@ -3,10 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Briefcase, DollarSign, ArrowRight } from "lucide-react";
 import SaveJobButton from "./SaveJobButton";
-import { getUserSession } from "@/lib/core/session";
 
-export default function JobCard({ job }) {
-
+export default function JobCard({ job, user, isSaved }) {
   const formatSalary = (amount) => {
     if (!amount) return "";
     return new Intl.NumberFormat("en-US", {
@@ -24,10 +22,8 @@ export default function JobCard({ job }) {
 
   return (
     <div className="bg-[#1C1C1C] border border-neutral-800 rounded-3xl p-6 flex flex-col h-full hover:border-neutral-700 transition-colors relative">
-      
       {/* Top Section */}
       <div className="flex-1">
-        
         {/* Container with space adjusted for the Bookmark button */}
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="flex items-center gap-3 min-w-0">
@@ -51,7 +47,13 @@ export default function JobCard({ job }) {
             </span>
           </div>
 
-          <SaveJobButton jobId={job._id} />
+          {user && (
+            <SaveJobButton
+              jobId={job._id}
+              initialIsSaved={isSaved}
+              user={user}
+            />
+          )}
         </div>
 
         <h3 className="text-xl font-semibold text-white mb-3">

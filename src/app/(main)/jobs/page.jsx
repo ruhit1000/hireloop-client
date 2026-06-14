@@ -4,14 +4,26 @@ import JobFilters from "@/components/AllJobs/JobFilters";
 import { getAllActiveJobs } from "@/lib/api/jobs";
 import { getUserSession } from "@/lib/core/session";
 import JobsPagination from "@/components/AllJobs/JobsPagination";
+import { getSavedJobIds } from "@/lib/api/savedJob";
 
 const AlljobsPage = async ({ searchParams }) => {
   const params = await searchParams;
 
-  const user = await getUserSession();
-  const hasUser = !!user;
+  const user = (await getUserSession()) || null;
+  let savedJobIds = [];
+  if (user) {
+    try {
+      savedJobIds = (await getSavedJobIds()) || [];
+      // Double check that we definitely got an array back from our utility
+      if (!Array.isArray(savedJobIds)) {
+        savedJobIds = [];
+      }
+    } catch (error) {
+      console.error("Error fetching saved job IDs:", error);
+      savedJobIds = [];
+    }
+  }
 
-  // Now returns our pagination envelope object: { jobs: [], meta: {} }
   const dataEnvelope = await getAllActiveJobs(params);
 
   const jobs = dataEnvelope?.jobs || [];
@@ -39,7 +51,8 @@ const AlljobsPage = async ({ searchParams }) => {
                 <JobCard
                   key={job._id}
                   job={job}
-                  hasUser={hasUser} // Forwards session tracking to the card bookmark
+                  user={user}
+                  isSaved={savedJobIds.includes(job._id)}
                 />
               ))}
             </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Table, Pagination, Toast, toast } from "@heroui/react";
+import { Table, Pagination, toast } from "@heroui/react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { updateCompany } from "@/lib/actions/companies";
@@ -75,7 +75,6 @@ export default function AdminCompaniesTable({ data, emails }) {
   return (
     <div className="space-y-5 w-full">
       {/* Premium Navigation Filter Tabs */}
-      <Toast.Provider />
       <div className="flex items-center gap-1.5 border-b border-[#1f2125] pb-3">
         {["all", "pending", "approved", "rejected"].map((status) => (
           <button

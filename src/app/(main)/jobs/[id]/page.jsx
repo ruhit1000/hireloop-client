@@ -12,6 +12,9 @@ import {
   CheckCircle2,
   ArrowLeft,
 } from "lucide-react";
+import SaveJobButton from "@/components/AllJobs/SaveJobButton";
+import { getUserSession } from "@/lib/core/session";
+import { getSavedJobIds } from "@/lib/api/savedJob";
 
 // Helper to format numbers (e.g., 90000 -> 90K)
 const formatSalary = (amount) => {
@@ -25,6 +28,8 @@ const formatSalary = (amount) => {
 const JobDetailsPage = async ({ params }) => {
   const { id } = await params;
   const jobDetails = await getJobById(id);
+  const user = await getUserSession();
+  const savedJobIds = await getSavedJobIds();
 
   // Handle case if job is not found
   if (!jobDetails) {
@@ -161,7 +166,16 @@ const JobDetailsPage = async ({ params }) => {
           {/* Sticky Sidebar Column (Takes 1/3 on Desktop) */}
           <div className="lg:col-span-1">
             <div className="bg-[#161616] border border-neutral-800 rounded-3xl p-6 sticky top-6">
-              <h3 className="text-lg font-bold text-white mb-6">Job Summary</h3>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold text-white">Job Summary</h3>
+                {user && (
+                  <SaveJobButton
+                    jobId={jobDetails._id}
+                    user={user}
+                    initialIsSaved={savedJobIds.includes(jobDetails._id)}
+                  />
+                )}
+              </div>
 
               <div className="space-y-2 mb-8">
                 <div className="flex items-center justify-between py-3 border-b border-neutral-800">

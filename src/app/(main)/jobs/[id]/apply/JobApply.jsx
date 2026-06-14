@@ -10,7 +10,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { submitApplication } from "@/lib/actions/applications";
-import { toast, Toast } from "@heroui/react";
+import { toast } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
 const JobApply = ({ jobDetails, applicant }) => {
@@ -50,7 +50,6 @@ const JobApply = ({ jobDetails, applicant }) => {
 
   return (
     <div className="px-4 flex justify-center items-start">
-        <Toast.Provider />
       <div className="max-w-2xl w-full">
         {/* Header Section */}
         <div className="mb-8 text-center">

@@ -11,7 +11,6 @@ import {
   Spinner,
   TextField,
   toast,
-  Toast,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
@@ -49,7 +48,6 @@ const SignInPage = () => {
       <div className="w-full max-w-md bg-[#161616] border border-neutral-800 rounded-3xl p-8 shadow-2xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <Toast.Provider />
           <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
             Welcome back
           </h1>

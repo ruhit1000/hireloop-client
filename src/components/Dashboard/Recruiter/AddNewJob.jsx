@@ -10,7 +10,7 @@ import {
   Check,
 } from "lucide-react";
 import { createJob } from "@/lib/actions/jobs";
-import { toast, Toast } from "@heroui/react";
+import { toast} from "@heroui/react";
 import { redirect } from "next/navigation";
 
 const AddNewJob = ({ company }) => {
@@ -63,7 +63,6 @@ const AddNewJob = ({ company }) => {
 
   return (
     <div className="p-6 max-w-4xl mx-auto w-full">
-      <Toast.Provider />
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white mb-1">Post a New Job</h1>
         <p className="text-sm text-neutral-400">

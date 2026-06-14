@@ -10,7 +10,6 @@ import {
   Label,
   Spinner,
   TextField,
-  Toast,
   toast,
   RadioGroup,
   Radio,
@@ -56,7 +55,6 @@ const SignUpPage = () => {
       <div className="w-full max-w-md bg-[#161616] border border-neutral-800 rounded-3xl p-8 shadow-2xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <Toast.Provider />
           <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
             Create an account
           </h1>

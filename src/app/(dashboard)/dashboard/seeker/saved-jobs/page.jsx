@@ -19,7 +19,7 @@ export default async function SeekerSavedJobsPage() {
   }).length;
 
   return (
-    <div className="min-h-screen bg-[#0B0B0C] text-white p-6 pt-24">
+    <div className="min-h-screen bg-[#0B0B0C] text-white p-6">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Top Header & Dynamic Stats Blocks Grid Row */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-neutral-900 pb-6">

@@ -33,7 +33,7 @@ export default function Navbar() {
   // Base items that match on both server and client initially
   const menuItems = [
     { name: "Browse Jobs", pathname: "/jobs" },
-    { name: "Company", pathname: "/company" },
+    { name: "Company", pathname: "/companies" },
     { name: "Pricing", pathname: "/pricing" },
   ];
 
